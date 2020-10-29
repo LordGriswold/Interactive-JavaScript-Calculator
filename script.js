@@ -3,8 +3,8 @@
  */
 document.title = "Interactive JavaScript Calculator";
 
-var UIDiv = document.createElement('div');
-UIDiv.setAttribute('class', 'black stuff-box shadowed');
+var calculatorDiv = document.createElement('div');
+calculatorDiv.setAttribute('class', 'black stuff-box shadowed');
 
 var header = document.createElement('h1');
 header.textContent = "JavaScript Calculator";
@@ -47,11 +47,38 @@ var input2 = document.createElement('input');
 input2.setAttribute('type', 'number');
 input2.setAttribute('value', 5);
 
-UIDiv.appendChild(header);
-UIDiv.appendChild(p0);
-UIDiv.appendChild(input1);
-UIDiv.appendChild(operationSelection);
-UIDiv.appendChild(input2);
+var button = document.createElement('button');
+button.textContent = "Calculate";
 
-document.body.appendChild(UIDiv);
+var colorSelect = document.createElement('input');
+colorSelect.setAttribute('type', 'color');
+
+var label = document.createElement('label');
+label.textContent = 'Color of div is ' + colorSelect.value;
+
+colorSelect.addEventListener('change', function(event) {
+    label.textContent = 'Color of div is ' + colorSelect.value;
+});
+
+button.addEventListener('click', function(event) {
+    var newDiv = document.createElement('div');
+    newDiv.setAttribute('class', 'black stuff-box shadowed');
+
+    var paragraph = document.createElement('p');
+    paragraph.textContent = eval(input1.value + operationSelection.value + input2.value);
+   
+   newDiv.appendChild(paragraph);
+    calculatorDiv.appendChild(newDiv);
+});
+
+calculatorDiv.appendChild(header);
+calculatorDiv.appendChild(p0);
+calculatorDiv.appendChild(input1);
+calculatorDiv.appendChild(operationSelection);
+calculatorDiv.appendChild(input2);
+calculatorDiv.appendChild(button);
+calculatorDiv.appendChild(colorSelect);
+calculatorDiv.appendChild(label);
+
+document.body.appendChild(calculatorDiv);
 
