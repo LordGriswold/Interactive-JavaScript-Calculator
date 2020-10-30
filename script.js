@@ -60,16 +60,41 @@ colorSelect.addEventListener('change', function(event) {
     label.textContent = 'Color of div is ' + colorSelect.value;
 });
 
+var latestNode = null;
+
 button.addEventListener('click', function(event) {
     var newDiv = document.createElement('div');
     newDiv.setAttribute('class', 'black stuff-box shadowed');
+    newDiv.style.backgroundColor = colorSelect.value;
 
     var paragraph = document.createElement('p');
-    paragraph.textContent = eval(input1.value + operationSelection.value + input2.value);
+    
+    if (input1.value == "" || input2.value == "") {
+        paragraph.textContent = 'Date: ' + new Date() + ' Result: ' + 'Error! Missing One Or More Operands!';
+        newDiv.style.backgroundColor = "#Ff0000";
+    }
+    else {
+        paragraph.textContent = 'Date: ' + new Date() + ' Result: ' + eval(input1.value + operationSelection.value + input2.value);
+    }
    
-   newDiv.appendChild(paragraph);
-    calculatorDiv.appendChild(newDiv);
+    newDiv.appendChild(paragraph);
+    
+    newDiv.addEventListener('click', function(event) {
+        newDiv.remove();
+        latestNode = null;
+    });
+    
+    if (latestNode === null) {
+        latestNode = newDiv;
+        document.body.appendChild(newDiv);
+    }
+    else {
+        document.body.insertBefore(newDiv, latestNode);
+        latestNode = newDiv;
+    }
 });
+
+
 
 calculatorDiv.appendChild(header);
 calculatorDiv.appendChild(p0);
