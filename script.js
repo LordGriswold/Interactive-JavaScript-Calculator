@@ -70,11 +70,11 @@ button.addEventListener('click', function(event) {
     var paragraph = document.createElement('p');
     
     if (input1.value == "" || input2.value == "") {
-        paragraph.textContent = 'Date: ' + new Date() + ' Result: ' + 'Error! Missing One Or More Operands!';
+        paragraph.textContent =' Result: ' + 'Error! Missing One Or More Operands!';
         newDiv.style.backgroundColor = "#Ff0000";
     }
     else {
-        paragraph.textContent = 'Date: ' + new Date() + ' Result: ' + eval(input1.value + operationSelection.value + input2.value);
+        paragraph.textContent = ' Result: ' + input1.value + ' ' + operationSelection.value + ' ' + input2.value + ' = ' + eval(input1.value + operationSelection.value + input2.value);
     }
    
     newDiv.appendChild(paragraph);
